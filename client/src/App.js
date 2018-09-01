@@ -10,8 +10,14 @@ import {
   VerticalGridLines, 
   HorizontalGridLines
 } from 'react-vis';
+import testFunction from './socket';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    testFunction((data) => this.setState({data}));
+  }
+
   render() {
     const data = [
       {x: 0, y: 8},
@@ -40,3 +46,5 @@ class App extends Component {
 }
 
 export default App;
+
+
