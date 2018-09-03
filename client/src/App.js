@@ -15,7 +15,13 @@ import testFunction from './socket';
 class App extends Component {
   constructor(props) {
     super(props)
-    testFunction((data) => this.setState({data}));
+    testFunction((err, content) => this.setState({ 
+      temp: content.sensorData.temperature
+    }));
+  }
+
+  state = {
+    temp: ''
   }
 
   render() {
@@ -33,13 +39,14 @@ class App extends Component {
     ];
     return (
       <div className="App">
-        <XYPlot height={600} width= {600}>
+        {/* <XYPlot height={600} width= {600}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis />
           <YAxis />
           <VerticalBarSeries data={data} />
-        </XYPlot>
+        </XYPlot> */}
+        <h1>TEMP IS: {this.state.temp}</h1>
       </div>
     );
   }

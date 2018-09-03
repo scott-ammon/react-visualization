@@ -31,7 +31,6 @@ dweetio.listen_for(dweetThing, (dweet) => {
   io.emit('sensor-data', data);
 });
 
-// Deliver React App
 app.use(express.static(`${__dirname}/client/build`));
 
 app.get('*', (req, res) => {
@@ -41,6 +40,4 @@ app.get('*', (req, res) => {
 http.listen(process.env.PORT || SERVER_PORT, () => {
   console.log(`Server started on the http://localhost:${SERVER_PORT}`);
 });
-
-// module.exports = server;
 
