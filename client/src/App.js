@@ -15,10 +15,17 @@ import testFunction from './socket';
 class App extends Component {
   constructor(props) {
     super(props)
+    let timeArray = []
+    let tempArray = []
+
     testFunction((err, content) => {
+      timeArray.push(content.time)
+      tempArray.push(content.sensorData.temperature)
+      console.log(timeArray)
+      console.log(tempArray)
       this.setState({ 
-        time: content.time,
-        temp: content.sensorData.temperature
+        time: timeArray,
+        temp: tempArray
       })
     })
   }
@@ -30,19 +37,26 @@ class App extends Component {
 
   render() {
 
-    const data = [
-      {x: 0, y: this.state.temp},
-    ];
+    const data = this.state.temp.map((temp, i) => {
+      return {x: i, y: temp}
+    })
+
+    console.log(data);
 
     return (
       <div className="App">
-      <h1>TEMP DEG F: {this.state.temp}</h1>
-        <XYPlot height={600} width= {600}>
+      <h1>Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</h1>
+        <XYPlot yDomain={[50,100]} height={600} width= {600}>
           <VerticalGridLines />
           <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
-          <LineSeries data={data} />
+          <XAxis
+            title="Time"
+            tickFormat={v => `${this.state.time[v]}`} tickLabelAngle={-90} />
+          <YAxis
+            title="Temp (F)" />
+          <LineSeries 
+            color="blue"
+            data={data} />
         </XYPlot>
       </div>
     );
