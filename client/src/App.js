@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import './App.css';
 import '../node_modules/react-vis/dist/style.css';
 import {
   XYPlot, 
   XAxis,
   YAxis,
   LineSeries, 
-  VerticalBarSeries,
   VerticalGridLines, 
   HorizontalGridLines
 } from 'react-vis';
-import testFunction from './socket';
+import receiveData from './socket';
 
 class App extends Component {
   constructor(props) {
     super(props)
     let timeArray = []
     let tempArray = []
+    let numReadings = 25
 
-    testFunction((err, content) => {
+    receiveData((err, content) => {
+      if(timeArray.length > numReadings) {
+        timeArray.shift()
+        tempArray.shift()
+      }
       timeArray.push(content.time)
       tempArray.push(content.sensorData.temperature)
-      console.log(timeArray)
-      console.log(tempArray)
       this.setState({ 
         time: timeArray,
         temp: tempArray
@@ -46,7 +47,7 @@ class App extends Component {
     return (
       <div className="App">
       <h1>Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</h1>
-        <XYPlot yDomain={[50,100]} height={600} width= {600}>
+        <XYPlot yDomain={[50,100]} height={600} width= {900}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis

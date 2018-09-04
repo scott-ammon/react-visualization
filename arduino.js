@@ -11,16 +11,16 @@ board.on('ready', () => {
   });
 
   temperatureSensor.on('change', (value) => {
-    const dweetThing = 'node-temperature-monitor';
+    const sensorName = 'node-temperature-monitor';
     let voltage = (value / 1024.0) * 5.0;
     let tempC = (voltage - 0.5) * 100;
     let tempF = tempC * (9 / 5) + 32;
 
-    const tweetMessage = {
+    const message = {
       temperature: tempF
     };
 
-    dweetio.dweet_for(dweetThing, tweetMessage, (err, dweet) => {
+    dweetio.dweet_for(sensorName, message, (err, dweet) => {
       if (err) {
         console.log('[Error]: ', err);
       }

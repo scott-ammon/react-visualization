@@ -8,22 +8,20 @@ const io = require('socket.io')(http);
 const moment = require('moment');
 
 const dweetio = new dweetClient();
-const dweetThing = 'node-temperature-monitor';
+const sensorName = 'node-temperature-monitor';
 const SERVER_PORT = 3000;
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 io.on('connection', (socket) => {
-  console.log('Connection has been established with browser.');
+  console.log('Connected to browser.');
   socket.on('disconnect', () => {
-  console.log('Browser client disconnected from the connection.');
+  console.log('Browser client disconnected.');
   });
 });
 
-dweetio.listen_for(dweetThing, (dweet) => {
+dweetio.listen_for(sensorName, (dweet) => {
   const data = {
     sensorData: dweet.content,
     time: moment().format('HH:mm:ss')
