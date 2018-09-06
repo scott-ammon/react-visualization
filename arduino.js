@@ -21,9 +21,9 @@ board.on('ready', () => {
     };
 
     dweetio.dweet_for(sensorName, message, (err, dweet) => {
-      if (err) {
-        console.log('[Error]: ', err);
-      }
+      // if (err) {
+      //   console.log('[Error]: ', err);
+      // }
       if (dweet) {
         console.log(dweet.content);
       }
