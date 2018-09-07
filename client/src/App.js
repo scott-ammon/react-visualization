@@ -42,11 +42,9 @@ class App extends Component {
       return {x: i, y: temp}
     })
 
-    console.log(data);
-
     return (
       <div className="App">
-      <h1>Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</h1>
+      <h1 className="temp-header">Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</h1>
         <XYPlot yDomain={[50,100]} height={600} width= {900}>
           <VerticalGridLines />
           <HorizontalGridLines />
