@@ -40,12 +40,9 @@ class App extends Component {
 
   render() {
 
-    // const data = this.state.temp.map((temp, i) => {
-    //   return {x: i, y: temp}
-    // });
-
-    const data = [{x: 1, y: 75}, {x: 2, y: 78}];
-    
+    const data = this.state.temp.map((temp, i) => {
+      return {x: i, y: temp}
+    });
 
     return (
       <div className="App">
