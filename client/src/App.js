@@ -10,6 +10,8 @@ import {
 } from 'react-vis';
 import receiveData from './socket';
 
+import styled from "styled-components";
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -38,14 +40,17 @@ class App extends Component {
 
   render() {
 
-    const data = this.state.temp.map((temp, i) => {
-      return {x: i, y: temp}
-    })
+    // const data = this.state.temp.map((temp, i) => {
+    //   return {x: i, y: temp}
+    // });
+
+    const data = [{x: 1, y: 75}, {x: 2, y: 78}];
+    
 
     return (
       <div className="App">
-      <h1 className="temp-header">Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</h1>
-        <XYPlot yDomain={[50,100]} height={600} width= {900}>
+      <TitleBlock className="temp-header">Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</TitleBlock>
+        <XYPlot yDomain={[50,100]} height={400} width={300}>"
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis
@@ -64,4 +69,7 @@ class App extends Component {
 
 export default App;
 
+const TitleBlock = styled.h1`
+  color: red;
+`;
 
