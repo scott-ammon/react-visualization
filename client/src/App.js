@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <div className="App">
       <TitleBlock className="temp-header">Current Temp (F): {this.state.temp[this.state.temp.length - 1]}</TitleBlock>
-        <XYPlot yDomain={[50,100]} height={400} width={300}>"
+        <XYPlot yDomain={[50,100]} height={400} width={300}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis
